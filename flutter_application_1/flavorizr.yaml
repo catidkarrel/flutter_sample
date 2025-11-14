@@ -1,0 +1,19 @@
+flavors:
+      dev:
+        app:
+          name: "DEV Flutter Sample"
+        android:
+          applicationId: "jp.co.mobileit.fluttersample"
+        ios:
+          bundleId: "jp.co.mobileit.fluttersample"
+        flutter:
+          entrypoint: "main_dev.dart"
+      prod:
+        app:
+          name: "Flutter Sample"
+        android:
+          applicationId: "jp.co.mobileit.fluttersampleprod"
+        ios:
+          bundleId: "jp.co.mobileit.fluttersampleprod"
+        flutter:
+          entrypoint: "main_prod.dart"
