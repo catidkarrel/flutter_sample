@@ -1,9 +1,12 @@
+// @CupertinoAutoRouter
+// @AdaptiveAutoRouter
+// @CustomAutoRouter
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/app/widget/app_start_page.dart';
 import 'package:flutter_application_1/feature/auth/widget/sign_in_page.dart';
 import 'package:flutter_application_1/feature/auth/widget/sign_up_page.dart';
+import 'package:flutter_application_1/feature/home/widget/home_page.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'app_router.g.dart';
@@ -11,12 +14,25 @@ part 'app_router.g.dart';
 final _key = GlobalKey<NavigatorState>(debugLabel: 'routerKey');
 
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   return GoRouter(
     navigatorKey: _key,
     debugLogDiagnostics: true,
     initialLocation: AppRoute.path,
-    routes: $appRoutes,
+    routes: <RouteBase>[
+      GoRouteData.$route<AppRoute>(
+        path: AppRoute.path,
+        factory: (state) => const AppRoute(),
+      ),
+      GoRouteData.$route<SignInRoute>(
+        path: SignInRoute.path,
+        factory: (state) => const SignInRoute(),
+      ),
+      GoRouteData.$route<SignUpRoute>(
+        path: SignUpRoute.path,
+        factory: (state) => const SignUpRoute(),
+      ),
+    ],
   );
 }
 
@@ -28,7 +44,7 @@ class AppRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AppStartPage();
+    return const HomePage();
   }
 }
 
@@ -36,7 +52,7 @@ class AppRoute extends GoRouteData {
 class SignInRoute extends GoRouteData {
   const SignInRoute();
 
-  static const path = '/signIn';
+  static const path = '/signin';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -48,7 +64,7 @@ class SignInRoute extends GoRouteData {
 class SignUpRoute extends GoRouteData {
   const SignUpRoute();
 
-  static const path = '/signUp';
+  static const path = '/signup';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -56,13 +72,13 @@ class SignUpRoute extends GoRouteData {
   }
 }
 
-class GoNavigatoObserver extends NavigatorObserver {
+class GoNavigatorObserver extends NavigatorObserver {
   @override
-  void didPush(Route route, Route? previousRoute) {
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     debugPrint('did push route $route : $previousRoute');
   }
   @override
-  void didPop(Route route, Route? previousRoute) {
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
     debugPrint('did pop route $route : $previousRoute');
   }
 }

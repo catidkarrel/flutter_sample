@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/feature/auth/provider/auth_provider.dart';
+// Ensure authNotifierProvider is defined in auth_provider.dart and exported
 import 'package:flutter_application_1/shared/route/app_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -64,7 +65,7 @@ class SignInPage extends ConsumerWidget {
                 .read(authNotifierProvider.notifier)
                 .login(_emailController.text, _passwordController.text);
           },
-          child: Text("sign_in".tr()),
+          child: Text("Sign In".tr()),
         ));
   }
 
@@ -75,7 +76,7 @@ class SignInPage extends ConsumerWidget {
           onPressed: () {
             ref.read(routerProvider).go(SignUpRoute.path);
           },
-          child: Text("sign_up".tr()),
+          child: Text("Sign Up".tr()),
         ));
   }
 }
